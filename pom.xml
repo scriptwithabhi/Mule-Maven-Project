@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>com.mycompany</groupId>
-	<artifactId>hellomule</artifactId>
+	<artifactId>indyapp</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>mule-application</packaging>
 
-	<name>hellomule</name>
+	<name>indyapp</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<app.runtime>4.3.0-20210719</app.runtime>
+		<app.runtime>4.3.0</app.runtime>
 		<mule.maven.plugin.version>3.5.4</mule.maven.plugin.version>
 	</properties>
 
@@ -27,14 +26,14 @@
 			<plugin>
 				<groupId>org.mule.tools.maven</groupId>
 				<artifactId>mule-maven-plugin</artifactId>
-				<version>${mule.maven.plugin.version}</version>
+				<version>3.5.4</version>
 				<extensions>true</extensions>
 				 <configuration>
 
         <cloudHubDeployment>
 
             <uri>https://anypoint.mulesoft.com</uri>
-
+	
         <muleVersion>4.3.0</muleVersion>
 
            <username>${anypoint.username}</username>
@@ -44,33 +43,43 @@
             <businessGroup>Deloitte</businessGroup>
 
        	 	<workerType>SMALL</workerType>
-
             <environment>Sandbox</environment>
 
-            <applicationName>hello-mule</applicationName>
+            <applicationName>indyapp</applicationName>
+			<region>us-east-2</region>
+
+		<!--	<authToken>268fbea9-1755-4d63-9a69-eddeb468403c</authToken>-->
+			 <properties>
+
+                <mule.env>Sandbox</mule.env>                 
+				<anypoint.platform.client_id>${client_id}</anypoint.platform.client_id>      
+				<anypoint.platform.client_secret>${client_secret}</anypoint.platform.client_secret>
+				 <anypoint.platform.grant_type>${grant_type}</anypoint.platform.grant_type>
+				
+				<anypoint.platform.config.analytics.agent.enabled>true</anypoint.platform.config.analytics.agent.enabled>
+
+            </properties>
+
 			<objectStoreV2>true</objectStoreV2>
         </cloudHubDeployment>
 
                 <executions>
 
-                        <execution>
-                            <id>deploy</id>
-
+                       <execution>
+                      <id>deploy</id>
                             <goals>
 
                                 <goal>deploy</goal>
+
                             </goals>
-
-                            <configuration>
-
+                          <configuration>
                                 <classifier>mule-application</classifier>
                             </configuration>
-                    </execution>
 
+                        </execution>
                     </executions>
-
                     
-                          <classifier>mule-application</classifier>
+                            <classifier>mule-application</classifier>
 
                 </configuration>
 
@@ -119,6 +128,11 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</pluginRepository>
+		<pluginRepository>
+            <id>mule-public</id>
+            <url>https://repository.mulesoft.org/nexus/content/repositories/releases</url>
+        </pluginRepository>
+
 	</pluginRepositories>
 
 </project>
